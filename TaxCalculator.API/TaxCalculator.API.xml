@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TaxCalculator.API</name>
+    </assembly>
+    <members>
+        <member name="M:TaxCalculator.API.Controllers.TaxDataController.GetPostalCodes">
+            <summary>
+            Get list of Postal Codes.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TaxCalculator.API.Controllers.TaxDataController.GetTaxResult(System.Int32)">
+            <summary>
+            Get a Tax Result record.
+            </summary>
+            <param name="taxResultID"> The Id of the TaxResult  </param>
+            <returns></returns>
+        </member>
+        <member name="M:TaxCalculator.API.Controllers.TaxDataController.SaveTaxResult(TaxCalculator.Models.Entities.TaxResult)">
+            <summary>
+            Create a Tax result record
+            </summary>
+            <param name="taxResult"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
