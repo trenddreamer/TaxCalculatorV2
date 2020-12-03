@@ -71,7 +71,7 @@ namespace TaxCalculator.API.Repository
             {
                 Username = username,
                 Password = password,
-                Role = "Admin"
+                Role = "admin"
             };
 
             _dbContext.Users.Add(userObj);

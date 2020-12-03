@@ -30,7 +30,7 @@ namespace TaxCalculator.API.Controllers
         [ProducesResponseType(200, Type = typeof(IEnumerable<PostalCode>))]
         public IActionResult GetPostalCodes()
         {
-            var data = _unitOfWork.PostalCode.GetAll();
+            var data = _unitOfWork.PostalCode.GetAll(orderBy: q => q.OrderBy(s => s.SortOrder));
             return Ok(data);
         }
 

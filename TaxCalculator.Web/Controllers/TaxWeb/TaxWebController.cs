@@ -11,6 +11,7 @@ using TaxCalculator.Repository.IRepository;
 
 namespace TaxCalculator.Controllers.TaxWeb
 {
+    [Authorize]
     public class TaxWebController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -29,6 +30,7 @@ namespace TaxCalculator.Controllers.TaxWeb
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Index(TaxResult model)
         {
             if (ModelState.IsValid)

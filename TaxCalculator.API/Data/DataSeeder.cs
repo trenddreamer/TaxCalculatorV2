@@ -16,11 +16,13 @@ namespace TaxCalculator.API.Data
         {
             if (!context.Users.Any())
             {
-                var User = new User()
+                var Users = new List<User>()
                 {
-                    Username="admin",Password="admin",Role="admin"
+                   new User {Username="admin",Password="admin",Role="admin" },
+                   new User {Username="test",Password="test",Role="test" }
+
                 };
-                context.Users.Add(User);
+                context.Users.AddRange(Users);
                 context.SaveChanges();
             }
             if (!context.TaxTypes.Any())

@@ -44,9 +44,8 @@ namespace TaxCalculator.Controllers.Home
             identity.AddClaim(new Claim(ClaimTypes.Name, objUser.Username));
             identity.AddClaim(new Claim(ClaimTypes.Role, objUser.Role));
 
-            //var principal = new ClaimsPrincipal(identity);
-            //await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-
+            var principal = new ClaimsPrincipal(identity);
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
             HttpContext.Session.SetString("JWToken", objUser.Token);
             TempData["alert"] = "Welcome " + objUser.Username;
@@ -74,7 +73,7 @@ namespace TaxCalculator.Controllers.Home
 
         public async Task<IActionResult> Logout()
         {
-           // await HttpContext.SignOutAsync();
+            await HttpContext.SignOutAsync();
             HttpContext.Session.SetString("JWToken", "");
             return RedirectToAction("Index");
         }
