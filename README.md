@@ -3,6 +3,7 @@ Welcome to my Tax Calculator App
 
 This project consists of a simple user interface and a Web Api as backend.
 
+I use a UnitOFWork/Repoistory pattern on both the web api using ApplicationDbContext and the web project using IHttpClientFactory. 
 The initial data required to run the application is seeded via the DataSeeder class in the web api project.
 
 You can test the API via swagger on the backend with integrated Bearer Token Authentication.
