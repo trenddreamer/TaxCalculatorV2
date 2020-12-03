@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using TaxCalculator.Models.Shared;
 
 namespace TaxCalculator.Models.Users
 {
-    public class User
+    public class User: BaseEntity
     {
-        public int Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public string Role { get; set; }

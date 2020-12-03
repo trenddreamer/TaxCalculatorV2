@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using TaxCalculator.API.Repository.IRepository;
 using TaxCalculator.Models.Entities;
+using TaxCalculator.Models.Users;
 
 namespace TaxCalculator.API.Data
 {
@@ -13,6 +14,15 @@ namespace TaxCalculator.API.Data
         //I use the DataSeeder class to initialize the database with the starter values provided.
         public static void Initialize(ApplicationDbContext context)
         {
+            if (!context.Users.Any())
+            {
+                var User = new User()
+                {
+                    Username="admin",Password="admin",Role="admin"
+                };
+                context.Users.Add(User);
+                context.SaveChanges();
+            }
             if (!context.TaxTypes.Any())
             {
                 var taxtypes = new List<TaxType>()
@@ -43,12 +53,12 @@ namespace TaxCalculator.API.Data
             {
                 var progTaxRate = new List<ProgressiveTaxRate>()
                 {
-                    new ProgressiveTaxRate{Rate = 0.10M,From = 0 ,To = 8350},
-                    new ProgressiveTaxRate{Rate = 0.15M,From = 8351 ,To = 33950},
-                    new ProgressiveTaxRate{Rate = 0.25M,From = 33951 ,To = 82250},
-                    new ProgressiveTaxRate{Rate = 0.28M,From = 82251 ,To = 171550},
-                    new ProgressiveTaxRate{Rate = 0.33M,From = 171551 ,To = 372950},
-                    new ProgressiveTaxRate{Rate = 0.35M,From = 372951 ,To = null}
+                    new ProgressiveTaxRate{Rate = 0.10M,LowBand = 0 ,HighBand = 8350},
+                    new ProgressiveTaxRate{Rate = 0.15M,LowBand = 8350 ,HighBand = 33950},
+                    new ProgressiveTaxRate{Rate = 0.25M,LowBand = 33950 ,HighBand = 82250},
+                    new ProgressiveTaxRate{Rate = 0.28M,LowBand = 82250 ,HighBand = 171550},
+                    new ProgressiveTaxRate{Rate = 0.33M,LowBand = 171550 ,HighBand = 372950},
+                    new ProgressiveTaxRate{Rate = 0.35M,LowBand = 372950 ,HighBand = null}
                 };
                 context.ProgressiveTaxRates.AddRange(progTaxRate);
                 context.SaveChanges();

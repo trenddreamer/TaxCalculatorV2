@@ -51,7 +51,7 @@ namespace TaxCalculator.Models.Calculator
                 //compare if the amount remaining to be taxed is greater than the current breakpoint, 
                 //if so we calculate the eligible portion of tax at the current rate and reduce the amount by the amount taxed and continue
                 //if eligibleIncome is null it will evaluate to the else block and we will calculate the remaining amount at the max rate.
-                int? eligibleIncome = taxRate.To.HasValue ? taxRate.To- (taxRate.From) : null;
+                int? eligibleIncome = taxRate.HighBand.HasValue ? taxRate.HighBand- (taxRate.LowBand) : null;
                 if (_amount > eligibleIncome)
                 {
                     _amount -= eligibleIncome.Value;

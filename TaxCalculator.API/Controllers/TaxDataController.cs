@@ -58,13 +58,14 @@ namespace TaxCalculator.API.Controllers
         [ProducesResponseType(201, Type = typeof(TaxResult))]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Authorize]
         public IActionResult SaveTaxResult([FromBody] TaxResult taxResult)
         {
             if (taxResult == null)
             {
                 return BadRequest(ModelState);
             }
-            var ratesData = _unitOfWork.ProgressiveTaxRate.GetAll(orderBy: q => q.OrderBy(s => s.From));
+            var ratesData = _unitOfWork.ProgressiveTaxRate.GetAll(orderBy: q => q.OrderBy(s => s.LowBand));
 
             var taxCalculator = new Calculator(taxResult.Amount, ratesData);
 

@@ -16,14 +16,14 @@ namespace TaxCalculator.Tests
         {
             var progTaxRate = new List<ProgressiveTaxRate>()
                 {
-                    new ProgressiveTaxRate{Rate = 0.10M,From = 0 ,To = 8350},
-                    new ProgressiveTaxRate{Rate = 0.15M,From = 8350 ,To = 33950},
-                    new ProgressiveTaxRate{Rate = 0.25M,From = 33950 ,To = 82250},
-                    new ProgressiveTaxRate{Rate = 0.28M,From = 82250 ,To = 171550},
-                    new ProgressiveTaxRate{Rate = 0.33M,From = 171550 ,To = 372950},
-                    new ProgressiveTaxRate{Rate = 0.35M,From = 372950 ,To = null}
+                    new ProgressiveTaxRate{Rate = 0.10M,LowBand = 0 ,HighBand = 8350},
+                    new ProgressiveTaxRate{Rate = 0.15M,LowBand = 8350 ,HighBand = 33950},
+                    new ProgressiveTaxRate{Rate = 0.25M,LowBand = 33950 ,HighBand = 82250},
+                    new ProgressiveTaxRate{Rate = 0.28M,LowBand = 82250 ,HighBand = 171550},
+                    new ProgressiveTaxRate{Rate = 0.33M,LowBand = 171550 ,HighBand = 372950},
+                    new ProgressiveTaxRate{Rate = 0.35M,LowBand = 372950 ,HighBand = null}
                 };
-            return progTaxRate.OrderBy(t => t.From).ToList();
+            return progTaxRate.OrderBy(t => t.LowBand).ToList();
         }
 
         [SetUp]

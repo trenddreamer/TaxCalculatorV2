@@ -8,7 +8,7 @@ namespace TaxCalculator.Models.Entities
     public class ProgressiveTaxRate: BaseEntity
     {
         public decimal Rate { get; set; }
-        public int From { get; set; }
-        public int? To { get; set; }
+        public int LowBand { get; set; }
+        public int? HighBand { get; set; }
     }
 }
