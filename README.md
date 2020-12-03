@@ -8,7 +8,7 @@ The initial data required to run the application is seeded via the DataSeeder cl
 You can test the API via swagger on the backend with integrated Bearer Token Authentication.
 
 A default user is created for you with username: admin and password: admin
-A test user is also added who does not have the admin role required to calculate tax.
+and a test user is also added who does not have the admin role required to calculate tax.
 If you register a user they will get the admin role automatically.
 
 I have a BaseUrl class in TaxCalculator.Web which stores the APIBaseURL
