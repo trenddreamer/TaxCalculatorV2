@@ -16,7 +16,6 @@ namespace TaxCalculator.Controllers.Home
     public class HomeController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        private static string APIBaseUrl = "https://localhost:44349/";
 
         public HomeController(IUnitOfWork unitOfWork)
         {
@@ -24,39 +23,8 @@ namespace TaxCalculator.Controllers.Home
         }
 
 
-        public async Task<IActionResult> Index()
-        {
-            var postalcode = await _unitOfWork.PostalCode.GetAllAsync(APIBaseUrl +"api/TaxData",HttpContext.Session.GetString("JWToken"));
-            ViewData["PostalCode"] = new SelectList(postalcode, "Id", "Description");
-            return View();
-        }
-
-        
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(TaxResult model)
-        {
-            if (ModelState.IsValid)
-            {
-                var success = await _unitOfWork.TaxResult.CreateAsync(APIBaseUrl + "api/taxdata/",model, HttpContext.Session.GetString("JWToken"));
-                if (success)
-                    TempData["Msg"] = "success";
-                else
-                    TempData["Msg"] = "error";
-                return RedirectToAction("index","home");
-            }
-            return View(model);
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Index()
         {
             User obj = new User();
             return View(obj);
@@ -64,9 +32,9 @@ namespace TaxCalculator.Controllers.Home
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(User obj)
+        public async Task<IActionResult> Index(User obj)
         {
-            User objUser = await _unitOfWork.Account.LoginAsync(APIBaseUrl + "api/Users/authenticate/", obj);
+            User objUser = await _unitOfWork.Account.LoginAsync(BaseUrl.APIBaseUrl + "api/Users/authenticate/", obj);
             if (objUser.Token == null)
             {
                 return View();
@@ -75,13 +43,14 @@ namespace TaxCalculator.Controllers.Home
             var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
             identity.AddClaim(new Claim(ClaimTypes.Name, objUser.Username));
             identity.AddClaim(new Claim(ClaimTypes.Role, objUser.Role));
-            var principal = new ClaimsPrincipal(identity);
+
+            //var principal = new ClaimsPrincipal(identity);
             //await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
 
             HttpContext.Session.SetString("JWToken", objUser.Token);
             TempData["alert"] = "Welcome " + objUser.Username;
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","TaxWeb");
         }
 
         [HttpGet]
@@ -94,13 +63,13 @@ namespace TaxCalculator.Controllers.Home
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(User obj)
         {
-            bool result = await _unitOfWork.Account.RegisterAsync(APIBaseUrl + "api/Users/register/", obj);
+            bool result = await _unitOfWork.Account.RegisterAsync(BaseUrl.APIBaseUrl + "api/Users/register/", obj);
             if (result == false)
             {
                 return View();
             }
             TempData["alert"] = "Registeration Successful";
-            return RedirectToAction("Login");
+            return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Logout()
@@ -114,6 +83,12 @@ namespace TaxCalculator.Controllers.Home
         public IActionResult AccessDenied()
         {
             return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
     }

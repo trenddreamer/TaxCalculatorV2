@@ -1,0 +1,67 @@
+﻿@model TaxCalculator.Models.Entities.TaxResult
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<br />
+<h2 class="text-info">Calculate Tax</h2>
+<br />
+
+<div class="border container" style="padding:30px;">
+    <form method="post">
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Amount"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="Amount" class="form-control" />
+                <span asp-validation-for="Amount" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="PostalCodeID"></label>
+            </div>
+            <div class="col-6">
+                <select asp-for="PostalCodeID" class="form-control" asp-items="ViewBag.PostalCode"></select>
+                <span asp-validation-for="PostalCodeID" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-3 offset-3">
+
+            </div>
+            <div class="col-3">
+                <button type="submit" class="btn btn-success form-control">
+                    Submit
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', (event) => {
+        (function () {
+            var msg = "@(TempData["Msg"] as string)";
+            if (msg === "success") {
+                toastr.success("Your tax calculation was successful and has been saved.",
+                    toastr.options = {
+                        "positionClass": "toast-top-right"
+                    });
+            }
+            if (msg == "error") {
+                toastr.error("There was an error generating your tax.",
+                    toastr.options = {
+                        "positionClass": "toast-top-right"
+                    });
+            }
+        })();
+    });
+
+
+</script>
