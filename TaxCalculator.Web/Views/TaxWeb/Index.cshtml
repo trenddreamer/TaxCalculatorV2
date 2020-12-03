@@ -1,5 +1,4 @@
 ﻿@model TaxCalculator.Models.Entities.TaxResult
-@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 <br />
 <h2 class="text-info">Calculate Tax</h2>
@@ -44,24 +43,3 @@
     <partial name="_ValidationScriptsPartial" />
 }
 
-<script type="text/javascript">
-    window.addEventListener('DOMContentLoaded', (event) => {
-        (function () {
-            var msg = "@(TempData["Msg"] as string)";
-            if (msg === "success") {
-                toastr.success("Your tax calculation was successful and has been saved.",
-                    toastr.options = {
-                        "positionClass": "toast-top-right"
-                    });
-            }
-            if (msg == "error") {
-                toastr.error("There was an error generating your tax.",
-                    toastr.options = {
-                        "positionClass": "toast-top-right"
-                    });
-            }
-        })();
-    });
-
-
-</script>

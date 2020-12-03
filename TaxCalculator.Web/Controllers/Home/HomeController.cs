@@ -2,12 +2,10 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Diagnostics;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using TaxCalculator.Models;
-using TaxCalculator.Models.Entities;
 using TaxCalculator.Models.Users;
 using TaxCalculator.Repository.IRepository;
 

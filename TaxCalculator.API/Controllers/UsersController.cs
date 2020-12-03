@@ -1,16 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc;
 using TaxCalculator.API.Repository.IRepository;
 using TaxCalculator.Models;
-using TaxCalculator.Models.Users;
 
 namespace TaxCalculator.API.Controllers
 {
-
     [Route("api/Users")]
     //[Route("api/[controller]")]
     [ApiController]

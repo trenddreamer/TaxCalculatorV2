@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Threading.Tasks;
 using TaxCalculator.Models.Entities;
 using TaxCalculator.Repository.IRepository;
 
@@ -37,9 +34,9 @@ namespace TaxCalculator.Controllers.TaxWeb
             {
                 var success = await _unitOfWork.TaxResult.CreateAsync(BaseUrl.APIBaseUrl + "api/taxdata/", model, HttpContext.Session.GetString("JWToken"));
                 if (success)
-                    TempData["Msg"] = "success";
+                    TempData["alert"] = "Your tax calculation was successful and has been saved.";
                 else
-                    TempData["Msg"] = "error";
+                    TempData["alert"] = "There was an error generating your tax.";
                 return RedirectToAction("Index", "TaxWeb");
             }
             return View(model);
