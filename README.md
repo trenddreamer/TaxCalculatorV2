@@ -16,6 +16,4 @@ If you register a user they will get the admin role automatically.
 
 I have a BaseUrl class in TaxCalculator.Web which stores the APIBaseURL
 
-I used .Net Core 3.1 since I understand that this is the version of .Net Core which is being used at PaySpace.
-
 Thank you for taking the time to test my app.
