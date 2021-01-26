@@ -16,4 +16,3 @@ If you register a user they will get the admin role automatically.
 
 I have a BaseUrl class in TaxCalculator.Web which stores the APIBaseURL
 
-Thank you for taking the time to test my app.
